@@ -1,0 +1,96 @@
+<!-- PlateMate: Mood-Based Recipe App -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlateMate - Mood-Based Recipes</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="PlateMate Logo" class="logo" id="custom-logo">
+        <h1>PlateMate</h1>
+        <nav>
+            <a href="#" onclick="authCheck('home')">Home</a>
+            <a href="#" onclick="authCheck('shop')">Find Restaurants</a>
+            <a href="#" onclick="authCheck('profile')">Profile</a>
+            <a href="#" onclick="showPage('login')">Login</a> 
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <main id="home" class="container">
+        <section class="section">
+            <h2>Mood-Based Recipes</h2>
+            <p>How are you feeling today?</p>
+            <button class="mood-btn" onclick="fetchRecipes('happy')">Happy</button>
+            <button class="mood-btn" onclick="fetchRecipes('stressed')">Stressed</button>
+            <button class="mood-btn" onclick="fetchRecipes('tired')">Tired</button>
+            <button class="mood-btn" onclick="fetchRecipes('energetic')">Energetic</button>
+            <div id="recipe-results" class="card-container"></div>
+        </section>
+        
+        <section class="section">
+            <h2>Ingredient-Based Recipes</h2>
+            <input type="text" id="user-ingredients" placeholder="Enter ingredients (comma separated)">
+            <div>
+                <button class="ingredient-btn" onclick="addIngredient('Eggs')">+ Eggs</button>
+                <button class="ingredient-btn" onclick="addIngredient('Milk')">+ Milk</button>
+                <button class="ingredient-btn" onclick="addIngredient('Flour')">+ Flour</button>
+                <button class="ingredient-btn" onclick="addIngredient('Sugar')">+ Sugar</button>
+            </div>
+            <button onclick="suggestRecipes()">Get Suggestions</button>
+            <div id="ingredient-recipe-results" class="card-container"></div>
+        </section>
+    </main>
+    
+    <!-- SHOP RESTAURANTS PAGE -->
+    <main id="shop" class="container" style="display:none;">
+        <section class="section">
+            <h2>Top 5 Restaurants Near You</h2>
+            <input type="text" id="location" placeholder="Enter your location">
+            <button class="shop-btn" onclick="findRestaurants()">Find Restaurants</button>
+            <div id="restaurant-results" class="card-container"></div>
+        </section>
+    </main>
+
+    <!-- LOGIN PAGE -->
+    <main id="login" style="display: none;" class="auth-container">
+    <div class="auth-box">
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Email" required>
+        <input type="password" id="login-password" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <a href="#" onclick="showPage('signup')">Sign Up</a></p>
+        <p class="error-message" id="login-error"></p>
+    </div>
+</main>
+
+<!-- SIGNUP PAGE -->
+<main id="signup" style="display: none;" class="auth-container">
+    <div class="auth-box">
+        <h2>Sign Up</h2>
+        <input type="text" id="signup-name" placeholder="Full Name" required>
+        <input type="email" id="signup-email" placeholder="Email" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <button onclick="register()">Sign Up</button>
+        <p class="error-message" id="signup-error"></p>
+    </div>
+</main>
+
+
+    <!-- PROFILE PAGE -->
+    <main id="profile" class="container" style="display:none;">
+        <section class="section">
+            <h2>User Profile</h2>
+            <p><strong>Name:</strong> <span id="profile-name"></span></p>
+            <p><strong>Email:</strong> <span id="profile-email"></span></p>
+            <h3>Saved Recipes:</h3>
+            <div id="saved-recipes" class="card-container"></div>
+            <button onclick="logout()">Logout</button>
+        </section>
+    </main>
+</body>
+</html>
